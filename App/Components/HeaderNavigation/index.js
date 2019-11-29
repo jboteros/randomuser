@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Image, Text, TouchableOpacity} from 'react-native';
+import {View, Image, TouchableOpacity} from 'react-native';
 
-
-import {Fonts, Colors, Images} from '../../Themes';
+import {Images} from '../../Themes';
 import styles from './styles';
 
 export default data => {

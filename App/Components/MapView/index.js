@@ -9,7 +9,7 @@ const mapStyle = require('../../Config/mapStyle.json');
 
 const ASPECT_RATIO = Metrics.screenWidth / Metrics.screenHeight;
 
-const LATITUDE_DELTA = 0.5;
+const LATITUDE_DELTA = 25;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 export default data => {
   const {coordinates} = data;
@@ -25,7 +25,7 @@ export default data => {
           ...StyleSheet.absoluteFillObject,
         }}
         customMapStyle={mapStyle}
-        initialRegion={{
+        region={{
           latitude: parseFloat(coordinates.latitude),
           longitude: parseFloat(coordinates.longitude),
           latitudeDelta: LATITUDE_DELTA,

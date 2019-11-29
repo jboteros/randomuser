@@ -8,9 +8,8 @@ export default StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    //ali: "absolute",
     width: '95%',
-    backgroundColor: Colors.textInputBg,
+    backgroundColor: Colors.soft,
     paddingHorizontal: 10,
   },
   image: {

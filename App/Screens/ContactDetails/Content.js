@@ -24,7 +24,6 @@ import Loading from '../../Components/Loading';
 
 const options = {
   title: 'Update contact picture',
-  // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
   storageOptions: {
     skipBackup: true,
     path: 'images/users',

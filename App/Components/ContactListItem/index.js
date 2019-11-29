@@ -4,6 +4,7 @@ import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
 export default data => {
   const {item, onPressedCell, pictures} = data;
   const {name, email, cell, location} = item;

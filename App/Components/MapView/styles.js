@@ -8,7 +8,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     //position: "absolute",
     width: '100%',
-    backgroundColor: Colors.textInputBg,
+    backgroundColor: Colors.soft,
     paddingHorizontal: 10,
   },
   mapContainer: {
