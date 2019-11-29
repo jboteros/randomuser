@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, Image, Text} from 'react-native';
+import moment from 'moment';
+import FastImage from 'react-native-fast-image';
 
-import Header from '../../Components/Header';
+import HeaderNavigation from '../../Components/HeaderNavigation';
+import ItemContact from '../../Components/ItemContact';
 
 import styles from './styles';
+import {Fonts, Metrics, ApplicationStyles} from '../../Themes';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export default class ContactDetails extends Component {
   constructor(props) {
@@ -15,13 +20,99 @@ export default class ContactDetails extends Component {
 
   render() {
     const {navigation, profile, loading} = this.props;
-    console.log('navigation', navigation);
-    // const {} = navigation.getParam;
-    // const {} = this.state;
+    const {
+      gender,
+      cell,
+      dob,
+      id,
+      email,
+      location,
+      name,
+      nat,
+      phone,
+
+      picture,
+    } = navigation.state.params;
+
+    const {first, last} = name;
     return (
       <View style={styles.container}>
-        <Header profile={profile} />
-        <View style={styles.contentList}></View>
+        <View style={styles.contentList}>
+          <View style={[styles.image, ApplicationStyles.shadown]}>
+            <View style={styles.imageBg} />
+            <Image
+              opacity={0.5}
+              blurRadius={5}
+              style={styles.imageBg}
+              source={{
+                uri: picture.thumbnail,
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.cover}
+            />
+
+            <FastImage
+              style={styles.imageSmall}
+              source={{
+                uri: picture.large,
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+            <Text
+              style={Fonts.style.bold(Colors.light, Fonts.size.medium, 'left')}>
+              {first} {last}
+            </Text>
+            <Text
+              style={Fonts.style.regular(
+                Colors.light,
+                Fonts.size.small,
+                'left',
+              )}>
+              {email}
+            </Text>
+
+            <View style={styles.ctaContainer}>
+              <View style={styles.ctaItem}>
+                <Text
+                  style={Fonts.style.regular(
+                    Colors.light,
+                    Fonts.size.small,
+                    'left',
+                  )}>
+                  Phone
+                </Text>
+              </View>
+              <View style={styles.ctaItem}>
+                <Text
+                  style={Fonts.style.regular(
+                    Colors.light,
+                    Fonts.size.small,
+                    'left',
+                  )}>
+                  email
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.itemsContact}>
+            <ItemContact title={'Phone:'} value={phone} />
+            <ItemContact title={'Cell:'} value={cell} />
+            <ItemContact
+              title={'Birthday:'}
+              value={moment(dob.date).format('LLL')}
+            />
+            <ItemContact
+              title={'Location:'}
+              value={`${location.street.number} ${location.street.name}, ${location.city} ${location.state} - ${location.country}`}
+            />
+          </View>
+        </View>
+        <HeaderNavigation
+          goBack={() => {
+            navigation.goBack();
+          }}
+        />
         {loading && <View style={styles.loading} />}
       </View>
     );

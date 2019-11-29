@@ -4,15 +4,57 @@ export default {
   container: {
     flex: 1,
     width: Metrics.screenWidth,
-    height: Metrics.screenHeight,
+
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  image: {
+    width: Metrics.screenWidth,
+    height: Metrics.screenWidth * 0.8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageBg: {
+    width: Metrics.screenWidth,
+    height: '100%',
+    backgroundColor: Colors.dark,
+    position: 'absolute',
+  },
+  imageSmall: {
+    marginVertical: 10,
+    width: Metrics.images.logo,
+    height: Metrics.images.logo,
+    borderRadius: Metrics.images.logo,
+    borderWidth: 5,
+    borderColor: Colors.gray,
+  },
+
+  itemsContact: {paddingTop: 60},
   containerItems: {
     flex: 1,
     marginTop: Metrics.header,
     paddingBottom: 10,
     alignItems: 'center',
+  },
+
+  ctaContainer: {
+    // width: 200,
+    height: 80,
+    position: 'absolute',
+
+    bottom: -40,
+    flexDirection: 'row',
+  },
+
+  ctaItem: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.light,
   },
 
   locationContainer: {flex: 0, justifyContent: 'center'},
@@ -85,6 +127,7 @@ export default {
   contentList: {
     flex: 1,
     width: Metrics.screenWidth,
+    // backgroundColor: 'red',
   },
   footerContainer: {
     flex: 0,

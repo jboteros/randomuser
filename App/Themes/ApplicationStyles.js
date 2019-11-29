@@ -3,12 +3,16 @@ import Metrics from './Metrics';
 import Colors from './Colors';
 
 const ApplicationStyles = {
-  test: {
-    marginTop: Metrics.screenWidth * 0.22,
-    width: Metrics.screenWidth,
-    height: Metrics.screenHeight,
-    backgroundColor: Colors.light,
-    fontFamily: Fonts.type.bold,
+  shadown: {
+    shadowColor: Colors.dark,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+
+    elevation: 5,
   },
 };
 

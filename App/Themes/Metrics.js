@@ -47,7 +47,7 @@ const metrics = {
     small: 25,
     medium: 50,
     large: 80,
-    logo: 100,
+    logo: 120,
   },
 };
 
