@@ -51,6 +51,11 @@ npm run ios
 npm run android
 ```
 
+## Items
+- Video: https://www.dropbox.com/s/xr2pwmvstib02kx/Screen%20Recording%202019-11-29%20at%204.07.44%20PM.mov?dl=0
+
+- bundle aab: https://www.dropbox.com/s/37cuwkers72c5js/randomuserBuild.aab?dl=0
+- Release apk: https://www.dropbox.com/s/sw6lhs88ivnhmyt/randomuserRelease.apk?dl=0
 
 ## Home
 [![Image from Gyazo](https://i.gyazo.com/f8ba334c1cddf410ad43529796d6d6dc.gif)](https://gyazo.com/f8ba334c1cddf410ad43529796d6d6dc)
