@@ -14,7 +14,6 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 export default data => {
   const {coordinates} = data;
 
-  console.log('data', data);
   return (
     <TouchableOpacity
       onPress={() => data.action()}

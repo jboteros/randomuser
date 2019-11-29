@@ -5,15 +5,16 @@ import Content from './Content';
 import {setLoading} from '../../Core/UI/Actions';
 import {getContacts, getProfile} from '../../Core/Contacts/Actions';
 
-const mapStateToProps = ({ui, contacts}) => {
+const mapStateToProps = ({ui, contacts, pics}) => {
   const {loading} = ui;
-
+  const {pictures} = pics;
   const {list, info, profile} = contacts;
   return {
     loading,
     list,
     info,
     profile,
+    pictures,
   };
 };
 

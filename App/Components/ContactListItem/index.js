@@ -5,8 +5,18 @@ import styles from './styles';
 import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 export default data => {
-  const {item, onPressedCell} = data;
+  const {item, onPressedCell, pictures} = data;
   const {name, email, cell, location} = item;
+
+  function validatePicture(mail, image) {
+    let idex = pictures.findIndex(i => i.email === mail);
+
+    if (idex !== -1) {
+      return pictures[idex].uri;
+    } else {
+      return image;
+    }
+  }
 
   function dialCall() {
     let phoneNumber = '';
@@ -45,10 +55,10 @@ export default data => {
       <FastImage
         style={styles.image}
         source={{
-          uri: item.picture.thumbnail,
+          uri: validatePicture(email, item.picture.thumbnail),
           priority: FastImage.priority.normal,
         }}
-        resizeMode={FastImage.resizeMode.contain}
+        resizeMode={FastImage.resizeMode.cover}
       />
       <View style={styles.textContainer}>
         <Text style={Fonts.style.bold(Colors.dark, Fonts.size.medium, 'left')}>

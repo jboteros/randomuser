@@ -32,7 +32,9 @@ export default class ContactsListView extends Component {
       moreContacts,
       isRefreshing,
       onRefresh,
+      pictures,
     } = this.props;
+
 
     return (
       <InfiniteScrollView
@@ -53,6 +55,7 @@ export default class ContactsListView extends Component {
             <ContactListItem
               key={index}
               item={item}
+              pictures={pictures}
               onPressedCell={() => {
                 this.props.onPressedCell(item);
               }}

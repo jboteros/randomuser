@@ -33,6 +33,7 @@ export default {
     zIndex: 1000,
     width: Metrics.screenWidth,
     height: Metrics.screenWidth * 0.8,
+    backgroundColor: Colors.light,
     justifyContent: 'center',
     alignItems: 'center',
   },

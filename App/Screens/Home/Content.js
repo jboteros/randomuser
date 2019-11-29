@@ -49,7 +49,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const {loading, profile, list, navigation} = this.props;
+    const {loading, profile, pictures, list, navigation} = this.props;
     const {loadingContacts} = this.state;
 
     return (
@@ -61,6 +61,7 @@ export default class Home extends Component {
             contacts={list}
             currentLocation={this.props.currentLocation}
             moreContacts={true}
+            pictures={pictures}
             loading={loadingContacts}
             onLoadContacts={() => {
               this.loadContacts();
