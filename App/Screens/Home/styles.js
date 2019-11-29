@@ -82,7 +82,7 @@ export default {
     flex: 1,
     padding: 10,
   },
-  scrollView: {
+  contentList: {
     flex: 1,
     width: Metrics.screenWidth,
   },
