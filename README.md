@@ -1,5 +1,5 @@
 # randomuser
-React Native + randomuser.me integration
+randomuser.me + React Native by Johntatan Botero (johnatan@jbotero.com)
 
 ===
 
@@ -50,3 +50,23 @@ npm run ios
 #or
 npm run android
 ```
+
+
+## Home
+[![Image from Gyazo](https://i.gyazo.com/f8ba334c1cddf410ad43529796d6d6dc.gif)](https://gyazo.com/f8ba334c1cddf410ad43529796d6d6dc)
+
+## Pagination
+[![Image from Gyazo](https://i.gyazo.com/15a2ffe49d3629b03aad70e1d28b9a10.gif)](https://gyazo.com/15a2ffe49d3629b03aad70e1d28b9a10)
+
+## Refres Data
+[![Image from Gyazo](https://i.gyazo.com/67de13323f3663cea919cca26250ab11.gif)](https://gyazo.com/67de13323f3663cea919cca26250ab11)
+
+## Detail View
+[![Image from Gyazo](https://i.gyazo.com/684708aa6a79cc317c9e2fc0ad06b6a8.gif)](https://gyazo.com/684708aa6a79cc317c9e2fc0ad06b6a8)
+
+## Linking
+Are items are linked
+[![Image from Gyazo](https://i.gyazo.com/516729d4a64ede882c573798c9596c2b.gif)](https://gyazo.com/516729d4a64ede882c573798c9596c2b)
+
+## Add contact picture
+[![Image from Gyazo](https://i.gyazo.com/d7accd8bc9d861cb38394d51b27a47ce.gif)](https://gyazo.com/d7accd8bc9d861cb38394d51b27a47ce)
