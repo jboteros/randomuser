@@ -10,6 +10,7 @@ export default {
   },
 
   image: {
+    zIndex: 1000,
     width: Metrics.screenWidth,
     height: Metrics.screenWidth * 0.8,
     justifyContent: 'center',
@@ -30,7 +31,8 @@ export default {
     borderColor: Colors.gray,
   },
 
-  itemsContact: {paddingTop: 60},
+  marginScroll: {height: Metrics.footerMenu * 2},
+  itemsContact: {paddingTop: 60, zIndex: 100},
   containerItems: {
     flex: 1,
     marginTop: Metrics.header,
@@ -127,7 +129,7 @@ export default {
   contentList: {
     flex: 1,
     width: Metrics.screenWidth,
-    // backgroundColor: 'red',
+
   },
   footerContainer: {
     flex: 0,

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Image, Text} from 'react-native';
+import {View, Image, Text, ScrollView} from 'react-native';
 import moment from 'moment';
 import FastImage from 'react-native-fast-image';
 
@@ -9,6 +9,7 @@ import ItemContact from '../../Components/ItemContact';
 import styles from './styles';
 import {Fonts, Metrics, ApplicationStyles} from '../../Themes';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import MapView from '../../Components/MapView';
 
 export default class ContactDetails extends Component {
   constructor(props) {
@@ -35,6 +36,10 @@ export default class ContactDetails extends Component {
     } = navigation.state.params;
 
     const {first, last} = name;
+
+    const {coordinates} = location;
+    const {latitude, longitude} = coordinates;
+
     return (
       <View style={styles.container}>
         <View style={styles.contentList}>
@@ -95,7 +100,7 @@ export default class ContactDetails extends Component {
               </View>
             </View>
           </View>
-          <View style={styles.itemsContact}>
+          <ScrollView style={styles.itemsContact}>
             <ItemContact title={'Phone:'} value={phone} />
             <ItemContact title={'Cell:'} value={cell} />
             <ItemContact
@@ -104,9 +109,12 @@ export default class ContactDetails extends Component {
             />
             <ItemContact
               title={'Location:'}
-              value={`${location.street.number} ${location.street.name}, ${location.city} ${location.state} - ${location.country}`}
+              value={`${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`}
             />
-          </View>
+            <MapView coordinates={{latitude, longitude}} />
+
+            <View style={styles.marginScroll} />
+          </ScrollView>
         </View>
         <HeaderNavigation
           goBack={() => {

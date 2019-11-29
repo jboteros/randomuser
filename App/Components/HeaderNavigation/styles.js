@@ -11,12 +11,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     flexDirection: 'row',
+    zIndex: 1000,
 
     paddingHorizontal: Metrics.screenWidth * 0.075,
   },
   image: {
     width: Metrics.images.small,
     height: Metrics.images.small,
+    zIndex: 2000,
     tintColor: Colors.light,
   },
 });
