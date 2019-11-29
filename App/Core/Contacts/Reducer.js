@@ -4,7 +4,7 @@ import {GET_CONTACTS, GET_PROFILE} from './Types';
 const initialState = {
   list: [],
   info: {page: 1, results: 10, seed: 'randomuser', version: 1.3},
-  profile: {name: null},
+  profile: null,
 };
 
 const getContacts = (state = initialState, {payload}) => {

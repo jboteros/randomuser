@@ -15,7 +15,7 @@ const metrics = {
   smallImage: wth => (400 / 1080) * wth,
 
   videoCollapsed: 80,
-  header: 60 + addHeader,
+  header: 70 + addHeader,
   addHeader,
   footerMenu: 50 + addFooter,
   itemMenu: 40,
@@ -44,10 +44,10 @@ const metrics = {
     xl: 50,
   },
   images: {
-    small: 20,
-    medium: 40,
-    large: 60,
-    logo: 200,
+    small: 25,
+    medium: 50,
+    large: 80,
+    logo: 100,
   },
 };
 

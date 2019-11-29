@@ -2,12 +2,12 @@ import {StyleSheet} from 'react-native';
 import {Metrics, Colors} from '../../Themes';
 export default StyleSheet.create({
   container: {
-    height: 40,
+    height: 80,
     marginVertical: 5,
     borderRadius: Metrics.textInBr,
     alignSelf: 'center',
     //position: "absolute",
-    width: '100%',
+    width: '95%',
     backgroundColor: Colors.textInputBg,
     paddingHorizontal: 10,
   },

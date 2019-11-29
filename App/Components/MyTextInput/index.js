@@ -1,10 +1,3 @@
-/**
- * Sample React Native App with Firebase
- * https://github.com/invertase/react-native-firebase
- *
- * @format
- * @flow
- */
 import React from 'react';
 import {View, TextInput} from 'react-native';
 

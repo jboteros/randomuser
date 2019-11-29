@@ -11,7 +11,8 @@ import {
 
 import {Colors, Images, Fonts} from '../../Themes';
 
-import MyTextInput from '../../Components/MyTextInput';
+import Header from '../../Components/Header';
+import ContactsListView from '../../Components/ContactsListView';
 
 import styles from './styles';
 
@@ -31,30 +32,14 @@ export default class Home extends Component {
     console.log('props', this.props);
   }
   render() {
-    const {loading} = this.props;
+    const {loading, profile, list} = this.props;
     const {} = this.state;
     return (
       <View style={styles.container}>
-        <KeyboardAvoidingView
-          // style={{position: 'absolute', flex: 1}}
-          behavior="padding"
-          enabled>
-          <ScrollView style={styles.scrollView}>
-            <Text
-              style={Fonts.style.regular(
-                Colors.dark,
-                Fonts.size.small,
-                'left',
-              )}>
-              Name:{' '}
-              <Text
-                style={Fonts.style.bold(Colors.dark, Fonts.size.small, 'left')}>
-                TEXT
-              </Text>
-            </Text>
-          </ScrollView>
-        </KeyboardAvoidingView>
-
+        <Header profile={profile} />
+        <View style={styles.scrollView}>
+          <ContactsListView list={list} />
+        </View>
         {loading && <View style={styles.loading} />}
       </View>
     );
