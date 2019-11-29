@@ -15,6 +15,7 @@ export default StyleSheet.create({
     width: Metrics.screenWidth * 0.8,
     alignSelf: 'center',
     overflow: 'hidden',
+    backgroundColor: Colors.light,
     borderRadius: Metrics.borderRadius,
     marginVertical: 10,
     height: 200,

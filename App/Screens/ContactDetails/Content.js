@@ -13,6 +13,7 @@ import moment from 'moment';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import ImagePicker from 'react-native-image-picker';
 import HeaderNavigation from '../../Components/HeaderNavigation';
 import ItemContact from '../../Components/ItemContact';
 import MapView from '../../Components/MapView';
@@ -21,13 +22,65 @@ import styles from './styles';
 import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 import Loading from '../../Components/Loading';
 
+const options = {
+  title: 'Update contact picture',
+  // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images/users',
+    avatarSource: '',
+    maxHeight: 250,
+    maxWidth: 250,
+    mediaType: 'photo',
+  },
+};
+
 export default class ContactDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  async componentDidMount() {}
+  async openModalPic() {
+    const {setLoading, navigation} = this.props;
+    const {email} = navigation.state.params;
+
+    setLoading(true);
+    ImagePicker.showImagePicker(options, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+        s;
+        setLoading(false);
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+        setLoading(false);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        setLoading(false);
+      } else {
+        let data = {email, ...response};
+        this.saveImage(data);
+      }
+    });
+  }
+
+  validatePicture(email, image) {
+    const {pictures} = this.props;
+
+    let idex = pictures.findIndex(i => i.email === email);
+
+    if (idex !== -1) {
+      return pictures[idex].uri;
+    } else {
+      return image;
+    }
+  }
+
+  async saveImage(data) {
+    const {setLoading, setPictures} = this.props;
+    await setPictures(data);
+    setLoading(false);
+  }
 
   dialNumber(number) {
     let phoneNumber = '';
@@ -89,7 +142,7 @@ export default class ContactDetails extends Component {
               blurRadius={Platform.OS === 'ios' ? 5 : 1}
               style={styles.imageBg}
               source={{
-                uri: picture.thumbnail,
+                uri: this.validatePicture(email, picture.thumbnail),
                 priority: FastImage.priority.normal,
               }}
               resizeMode={FastImage.resizeMode.cover}
@@ -126,14 +179,19 @@ export default class ContactDetails extends Component {
                   </Text>
                 </View>
               </View>
-              <FastImage
-                style={styles.imageSmall}
-                source={{
-                  uri: picture.large,
-                  priority: FastImage.priority.normal,
-                }}
-                resizeMode={FastImage.resizeMode.contain}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  this.openModalPic();
+                }}>
+                <FastImage
+                  style={styles.imageSmall}
+                  source={{
+                    uri: this.validatePicture(email, picture.large),
+                    priority: FastImage.priority.normal,
+                  }}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
+              </TouchableOpacity>
             </View>
             <Text
               style={Fonts.style.bold(Colors.light, Fonts.size.medium, 'left')}>

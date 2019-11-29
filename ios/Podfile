@@ -39,10 +39,5 @@ target 'randomuser' do
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
 
-  target 'randomuserTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
   use_native_modules!
 end
