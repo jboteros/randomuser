@@ -1,4 +1,4 @@
-package com.randomuser;
+package com.jbotero.randomuser;
 
 import android.app.Application;
 import android.content.Context;

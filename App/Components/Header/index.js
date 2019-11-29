@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 
 import FastImage from 'react-native-fast-image';
 
-import {Fonts, Colors} from '../../Themes';
+import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 import styles from './styles';
 
 export default data => {
@@ -16,13 +16,13 @@ export default data => {
   const {first, last} = name;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, ApplicationStyles.shadown]}>
       <View>
-        <Text style={Fonts.style.bold(Colors.dark, Fonts.size.medium, 'left')}>
+        <Text style={Fonts.style.bold(Colors.light, Fonts.size.medium, 'left')}>
           {first} {last}
         </Text>
         <Text
-          style={Fonts.style.regular(Colors.dark, Fonts.size.small, 'left')}>
+          style={Fonts.style.regular(Colors.light, Fonts.size.small, 'left')}>
           {email}
         </Text>
       </View>

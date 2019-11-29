@@ -25,7 +25,7 @@ export const getProfile = () => async dispatch => {
 
 export const getContacts = (page, results) => async dispatch => {
   const api = apisauce.create({
-    baseURL: `https://randomuser.me/api/?page=${page}&results=${results}&seed=rdmusr`,
+    baseURL: `https://randomuser.me/api/?page=${page}&results=${results}&nat=us&seed=rdmusr`,
     headers: {
       Accept: 'application/json',
     },

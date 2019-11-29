@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, StatusBar} from 'react-native';
 
 import Header from '../../Components/Header';
 import ContactsListView from '../../Components/ContactsListView';
+import Loading from '../../Components/Loading';
 
 import styles from './styles';
 
@@ -14,6 +15,9 @@ export default class Home extends Component {
 
   async componentDidMount() {
     const {setLoading, getProfile} = this.props;
+
+    StatusBar.setBarStyle('light-content', false);
+
     setLoading(true);
     await getProfile();
     this.onRefresh();
@@ -73,7 +77,7 @@ export default class Home extends Component {
             }
           />
         </View>
-        {loading && <View style={styles.loading} />}
+        <Loading loading={loading} />
       </View>
     );
   }
