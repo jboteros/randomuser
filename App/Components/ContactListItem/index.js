@@ -26,6 +26,7 @@ export default data => {
     const {coordinates} = location;
     const {latitude, longitude} = coordinates;
 
+    // eslint-disable-next-line prettier/prettier
     const label = `${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`;
 
     const url = Platform.select({
