@@ -24,9 +24,8 @@ export const getProfile = () => async dispatch => {
 };
 
 export const getContacts = (page, results) => async dispatch => {
-  console.log('=> getContacts', page, results);
   const api = apisauce.create({
-    baseURL: `https://randomuser.me/api/?page=${page}&results=${results}&seed=randomuser`,
+    baseURL: `https://randomuser.me/api/?page=${page}&results=${results}&seed=rdmusr`,
     headers: {
       Accept: 'application/json',
     },
@@ -41,8 +40,6 @@ export const getContacts = (page, results) => async dispatch => {
       });
     });
   });
-
-  console.log('result.data', result.data.info);
 
   const info = result.data.info;
   Promise.all(contacts).then(list => {

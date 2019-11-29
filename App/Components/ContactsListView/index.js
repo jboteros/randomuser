@@ -5,23 +5,19 @@ import {
   FlatList,
   ActivityIndicator,
   RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
 
 import InfiniteScrollView from 'react-native-infinite-scroll';
-import FastImage from 'react-native-fast-image';
+
+import ContactListItem from '../ContactListItem';
 
 import styles from './styles';
-
 import {Fonts, Colors, Metrics} from '../../Themes';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default class ContactsListView extends Component {
   constructor(props) {
     super(props);
-  }
-
-  onPressedCell(rowData) {
-    console.log('onPressedCell', rowData);
   }
 
   renderFooter() {
@@ -42,11 +38,10 @@ export default class ContactsListView extends Component {
       onLoadContacts,
       moreContacts,
       isRefreshing,
-      loading,
       onRefresh,
+      navigation,
     } = this.props;
 
-    console.log('contacts', contacts.length);
     return (
       <InfiniteScrollView
         refreshControl={
@@ -56,43 +51,19 @@ export default class ContactsListView extends Component {
             tintColor={Colors.gray}
           />
         }
-        distanceFromEnd={10}
+        distanceFromEnd={15}
         canLoadMore={moreContacts}
         onLoadMoreAsync={() => onLoadContacts()}>
         <FlatList
           data={contacts}
           renderItem={({item, index}) => (
-            <TouchableOpacity
+            <ContactListItem
               key={index}
-              style={styles.item}
-              onPress={() => this.onPressedCell(item)}>
-              <FastImage
-                style={styles.image}
-                source={{
-                  uri: item.picture.thumbnail,
-                  priority: FastImage.priority.normal,
-                }}
-                resizeMode={FastImage.resizeMode.contain}
-              />
-              <View style={styles.textContainer}>
-                <Text
-                  style={Fonts.style.bold(
-                    Colors.dark,
-                    Fonts.size.medium,
-                    'left',
-                  )}>
-                  {index} {item.name.first} {item.name.last}
-                </Text>
-                <Text
-                  style={Fonts.style.regular(
-                    Colors.dark,
-                    Fonts.size.small,
-                    'left',
-                  )}>
-                  {item.email}
-                </Text>
-              </View>
-            </TouchableOpacity>
+              item={item}
+              onPressedCell={item => {
+                this.props.onPressedCell(item);
+              }}
+            />
           )}
           keyExtractor={(item, index) => index.toString()}
           ListFoterComponent={this.renderFooter.bind(this)}

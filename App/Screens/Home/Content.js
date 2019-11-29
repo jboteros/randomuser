@@ -1,15 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Keyboard,
-  ScrollView,
-} from 'react-native';
-
-import {Colors, Images, Fonts} from '../../Themes';
+import {View} from 'react-native';
 
 import Header from '../../Components/Header';
 import ContactsListView from '../../Components/ContactsListView';
@@ -31,22 +21,33 @@ export default class Home extends Component {
   }
 
   async onRefresh() {
-    const {setLoading, getContacts} = this.props;
+    const {getContacts} = this.props;
     this.setState({loadingContacts: true});
     await getContacts(1, 20);
     this.setState({loadingContacts: false});
   }
 
   async loadContacts() {
-    const {setLoading, info, getContacts} = this.props;
-    console.log('loadContacts:info', info);
-    await getContacts(info.page + 1, 20);
-    this.setState({loadingContacts: false});
+    const that = this;
+
+    if (this.state.loadingContacts) {
+      return;
+    }
+
+    this.setState({loadingContacts: true}, async () => {
+      const {info, getContacts} = this.props;
+      await getContacts(info.page + 1, 20);
+
+      setTimeout(function() {
+        that.setState({loadingContacts: false});
+      }, 1000);
+    });
   }
 
   render() {
-    const {loading, profile, list} = this.props;
+    const {loading, profile, list, navigation} = this.props;
     const {loadingContacts} = this.state;
+
     return (
       <View style={styles.container}>
         <Header profile={profile} />
@@ -61,9 +62,11 @@ export default class Home extends Component {
               this.loadContacts();
             }}
             isRefreshing={loadingContacts}
-            onRefresh={() => this.onRefresh()}
+            onRefresh={() => {
+              this.onRefresh();
+            }}
             onPressedCell={rowData => {
-              console.log('home:onPress', rowData);
+              navigation.navigate('ContactDetails', rowData);
             }}
             specialSearch={
               this.state.specialSearch && this.state.isSearchingMode
