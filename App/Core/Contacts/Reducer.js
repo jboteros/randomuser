@@ -8,15 +8,30 @@ const initialState = {
 };
 
 const getContacts = (state = initialState, {payload}) => {
-  console.log('reducer:getContacts', payload);
-  return {
-    ...state,
-    list: payload,
-  };
+  console.log(' A', state.list);
+
+  const {list, info} = payload;
+
+  if (payload.info.page === 1) {
+    return {
+      ...state,
+      list,
+      info,
+    };
+  } else {
+    console.log('concat C', state.list, list);
+    let data = [...state.list, ...list];
+
+    console.log('data D', data);
+    return {
+      ...state,
+      list: data,
+      info,
+    };
+  }
 };
 
 const getProfile = (state = initialState, {payload}) => {
-  console.log('reducer:getContacts', payload);
   return {
     ...state,
     profile: payload,

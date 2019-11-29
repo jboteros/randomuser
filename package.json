@@ -24,6 +24,7 @@
     "react-native-device-info": "^5.3.1",
     "react-native-fast-image": "^7.0.2",
     "react-native-gesture-handler": "^1.5.2",
+    "react-native-infinite-scroll": "^1.0.6",
     "react-native-iphone-x-helper": "^1.2.1",
     "react-native-maps": "^0.26.1",
     "react-native-reanimated": "^1.4.0",
