@@ -50,7 +50,7 @@ export default class ContactDetails extends Component {
     const {location} = navigation.state.params;
     const {coordinates} = location;
     const {latitude, longitude} = coordinates;
-
+    // eslint-disable-next-line prettier/prettier
     const label = `${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`;
 
     const url = Platform.select({
@@ -187,6 +187,7 @@ export default class ContactDetails extends Component {
             <ItemContact
               icon={'map-marker-alt'}
               title={'Location:'}
+              // eslint-disable-next-line prettier/prettier
               value={`${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`}
               action={() => this.goLocation()}
             />
