@@ -49,7 +49,6 @@ export default class ContactDetails extends Component {
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
-        s;
         setLoading(false);
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
