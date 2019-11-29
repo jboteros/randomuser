@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -37,8 +37,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We use this to customize profile photos</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>We use this to customize profile photos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We use this to customize profile photos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We use this to customize profile photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We use this to customize profile photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Bold.ttf</string>
@@ -64,13 +72,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>description</string>
-	<key>NSCameraUsageDescription</key>
-	<string>descripton</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>descrioption</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>description</string>
 </dict>
 </plist>
