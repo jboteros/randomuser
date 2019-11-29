@@ -19,7 +19,7 @@ export default data => {
   }
 
   function sendEmail() {
-    Linking.openURL(`mailto://${email}&subject=&body=`);
+    Linking.openURL(`mailto:${email}`);
   }
 
   function goLocation() {

@@ -42,7 +42,7 @@ export default class ContactDetails extends Component {
   sendEmail() {
     const {navigation} = this.props;
     const {email} = navigation.state.params;
-    Linking.openURL(`mailto://${email}&subject=&body=`);
+    Linking.openURL(`mailto:${email}`);
   }
 
   goLocation() {
