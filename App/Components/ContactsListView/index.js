@@ -39,7 +39,6 @@ export default class ContactsListView extends Component {
       moreContacts,
       isRefreshing,
       onRefresh,
-      navigation,
     } = this.props;
 
     return (
