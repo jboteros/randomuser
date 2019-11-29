@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 
@@ -14,8 +14,10 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 export default data => {
   const {coordinates} = data;
 
+  console.log('data', data);
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => data.action()}
       pointerEvents={'none'}
       style={[styles.mapContainer, ApplicationStyles.shadown]}>
       <MapView
@@ -37,6 +39,6 @@ export default data => {
           }}
         />
       </MapView>
-    </View>
+    </TouchableOpacity>
   );
 };

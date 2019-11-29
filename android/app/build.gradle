@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.randomuser"
+        applicationId "com.jbotero.randomuser"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

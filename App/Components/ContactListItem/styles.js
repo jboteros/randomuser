@@ -16,9 +16,20 @@ export default StyleSheet.create({
   image: {
     width: Metrics.images.medium,
     height: Metrics.images.medium,
+    borderWidth: 2,
+    borderColor: Colors.accentColorLight,
     borderRadius: Metrics.images.medium / 2,
   },
   textContainer: {
     marginHorizontal: 10,
   },
+
+  iconsContainer: {
+    flex: 1,
+    height: 60,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  iconsItem: {marginHorizontal: 10},
 });

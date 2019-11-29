@@ -1,4 +1,4 @@
-package com.randomuser;
+package com.jbotero.randomuser;
 
 import com.facebook.react.ReactActivity;
 

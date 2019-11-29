@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -9,7 +9,7 @@ import {Fonts, Colors} from '../../Themes';
 export default data => {
   const {title, value, icon} = data;
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => data.action()}>
       <Text
         style={Fonts.style.light(
           Colors.accentColorLight,
@@ -22,6 +22,6 @@ export default data => {
       <Text style={Fonts.style.bold(Colors.dark, Fonts.size.medium, 'left')}>
         {value}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };

@@ -6,6 +6,7 @@ import {
   ScrollView,
   Platform,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 
 import moment from 'moment';
@@ -27,6 +28,37 @@ export default class ContactDetails extends Component {
   }
 
   async componentDidMount() {}
+
+  dialNumber(number) {
+    let phoneNumber = '';
+    if (Platform.OS === 'android') {
+      phoneNumber = `tel:${number}`;
+    } else {
+      phoneNumber = `telprompt:${number}`;
+    }
+    Linking.openURL(phoneNumber);
+  }
+
+  sendEmail() {
+    const {navigation} = this.props;
+    const {email} = navigation.state.params;
+    Linking.openURL(`mailto://${email}&subject=&body=`);
+  }
+
+  goLocation() {
+    const {navigation} = this.props;
+    const {location} = navigation.state.params;
+    const {coordinates} = location;
+    const {latitude, longitude} = coordinates;
+
+    const label = `${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`;
+
+    const url = Platform.select({
+      ios: 'maps:' + latitude + ',' + longitude + '?q=' + label,
+      android: 'geo:' + latitude + ',' + longitude + '?q=' + label,
+    });
+    Linking.openURL(url);
+  }
 
   render() {
     const {navigation, loading} = this.props;
@@ -117,28 +149,51 @@ export default class ContactDetails extends Component {
             </Text>
 
             <View style={styles.ctaContainer}>
-              <TouchableOpacity style={styles.ctaItem}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.dialNumber(cell);
+                }}
+                style={styles.ctaItem}>
                 <Icon name={'mobile-alt'} size={24} color={'rgb(0,98,150)'} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.ctaItem}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.sendEmail();
+                }}
+                style={styles.ctaItem}>
                 <Icon name={'envelope'} size={24} color={'rgb(0,98,150)'} />
               </TouchableOpacity>
             </View>
           </View>
           <ScrollView style={styles.itemsContact}>
-            <ItemContact icon={'phone'} title={'Phone:'} value={phone} />
-            <ItemContact icon={'mobile-alt'} title={'Cell:'} value={cell} />
+            <ItemContact
+              icon={'phone'}
+              title={'Phone:'}
+              value={phone}
+              action={() => this.dialNumber(phone)}
+            />
+            <ItemContact
+              icon={'mobile-alt'}
+              title={'Cell:'}
+              value={cell}
+              action={() => this.dialNumber(cell)}
+            />
             <ItemContact
               icon={'birthday-cake'}
               title={'Birthday:'}
               value={`${moment(date).format('LL')}, ${age} years old`}
+              action={() => this.goLocation()}
             />
             <ItemContact
               icon={'map-marker-alt'}
               title={'Location:'}
               value={`${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`}
+              action={() => this.goLocation()}
             />
-            <MapView coordinates={{latitude, longitude}} />
+            <MapView
+              coordinates={{latitude, longitude}}
+              action={() => this.goLocation()}
+            />
 
             <View style={styles.marginScroll} />
           </ScrollView>

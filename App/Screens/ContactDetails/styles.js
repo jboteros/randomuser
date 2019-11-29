@@ -49,6 +49,7 @@ export default {
     borderRadius: Metrics.images.logo,
     borderWidth: 5,
     borderColor: Colors.accentMask(1.0),
+    backgroundColor: Colors.accentMask(1.0),
   },
 
   marginScroll: {height: Metrics.footerMenu * 2},
