@@ -84,6 +84,7 @@ export default {
   },
   contentList: {
     flex: 1,
+
     width: Metrics.screenWidth,
   },
   footerContainer: {
@@ -95,7 +96,7 @@ export default {
     alignItems: 'center',
   },
   loading: {
-    backgroundColor: Colors.loader,
+    backgroundColor: Colors.accentMask(0.5),
     position: 'absolute',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -168,7 +169,7 @@ export default {
 
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.accentColors[0],
+    backgroundColor: Colors.accentColor,
     shadowColor: Colors.dark,
     shadowOffset: {
       width: 2,

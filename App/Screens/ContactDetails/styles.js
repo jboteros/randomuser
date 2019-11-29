@@ -9,6 +9,26 @@ export default {
     alignItems: 'center',
   },
 
+  itemBasic: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 80,
+    width: 80,
+  },
+  ovalContainer: {
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  ovalItem: {
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    width: Metrics.screenWidth * 0.6,
+    borderRadius: 40,
+    height: 80,
+    backgroundColor: Colors.accentMask(0.5),
+    position: 'absolute',
+    flexDirection: 'row',
+  },
   image: {
     zIndex: 1000,
     width: Metrics.screenWidth,
@@ -28,7 +48,7 @@ export default {
     height: Metrics.images.logo,
     borderRadius: Metrics.images.logo,
     borderWidth: 5,
-    borderColor: Colors.gray,
+    borderColor: Colors.accentMask(1.0),
   },
 
   marginScroll: {height: Metrics.footerMenu * 2},
@@ -129,7 +149,6 @@ export default {
   contentList: {
     flex: 1,
     width: Metrics.screenWidth,
-
   },
   footerContainer: {
     flex: 0,
@@ -140,14 +159,14 @@ export default {
     alignItems: 'center',
   },
   loading: {
-    backgroundColor: Colors.loader,
+    backgroundColor: Colors.accentMask(0.5),
     position: 'absolute',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     height: Metrics.screenHeight,
     width: Metrics.screenWidth,
-    zIndex: 2000,
+    zIndex: 5000,
   },
   logo: {
     width: Metrics.screenWidth * 0.4,
@@ -213,7 +232,7 @@ export default {
 
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.accentColors[0],
+    backgroundColor: Colors.accentColor,
     shadowColor: Colors.dark,
     shadowOffset: {
       width: 2,

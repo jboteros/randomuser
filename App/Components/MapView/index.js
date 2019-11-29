@@ -1,22 +1,13 @@
 import React from 'react';
-import {View, Dimensions, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
-import MapView, {
-  PROVIDER_GOOGLE,
-  Marker,
-  AnimatedRegion,
-} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 
 import styles from './styles';
-import {ApplicationStyles} from '../../Themes';
+import {ApplicationStyles, Metrics} from '../../Themes';
 const mapStyle = require('../../Config/mapStyle.json');
 
-const screen = Dimensions.get('window');
-// const ASPECT_RATIO = (screen.width * 0.8) / screen.height;
-// const LATITUDE_DELTA = 0.01;
-// const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-const ASPECT_RATIO = screen.width / screen.height;
+const ASPECT_RATIO = Metrics.screenWidth / Metrics.screenHeight;
 
 const LATITUDE_DELTA = 0.5;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;

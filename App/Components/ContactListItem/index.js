@@ -2,13 +2,13 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
-import {Fonts, Colors} from '../../Themes';
+import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 
 export default data => {
   const {item, onPressedCell} = data;
   return (
     <TouchableOpacity
-      style={styles.item}
+      style={[styles.item, ApplicationStyles.shadown]}
       onPress={() => {
         onPressedCell(item);
       }}>

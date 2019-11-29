@@ -1,19 +1,12 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  RefreshControl,
-  TouchableOpacity,
-} from 'react-native';
+import {View, FlatList, ActivityIndicator, RefreshControl} from 'react-native';
 
 import InfiniteScrollView from 'react-native-infinite-scroll';
 
 import ContactListItem from '../ContactListItem';
 
 import styles from './styles';
-import {Fonts, Colors, Metrics} from '../../Themes';
+import {Colors, Metrics} from '../../Themes';
 
 export default class ContactsListView extends Component {
   constructor(props) {
@@ -53,13 +46,14 @@ export default class ContactsListView extends Component {
         distanceFromEnd={15}
         canLoadMore={moreContacts}
         onLoadMoreAsync={() => onLoadContacts()}>
+        <View style={styles.marginScroll} />
         <FlatList
           data={contacts}
           renderItem={({item, index}) => (
             <ContactListItem
               key={index}
               item={item}
-              onPressedCell={item => {
+              onPressedCell={() => {
                 this.props.onPressedCell(item);
               }}
             />
