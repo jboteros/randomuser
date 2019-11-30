@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 
 import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 import styles from './styles';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default data => {
   if (data.profile == null) {
@@ -25,6 +26,21 @@ export default data => {
           style={Fonts.style.regular(Colors.light, Fonts.size.small, 'left')}>
           {email}
         </Text>
+        {__DEV__ && (
+          <TouchableOpacity
+            onPress={() => {
+              data.devLog();
+            }}>
+            <Text
+              style={Fonts.style.regular(
+                Colors.light,
+                Fonts.size.small,
+                'left',
+              )}>
+              Storybook
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       <FastImage
         style={styles.image}

@@ -48,13 +48,18 @@ export default class Home extends Component {
     });
   }
 
+  storybook() {
+    const {navigation} = this.props;
+    navigation.navigate('storybookView');
+    console.log('storybooks');
+  }
   render() {
     const {loading, profile, pictures, list, navigation} = this.props;
     const {loadingContacts} = this.state;
 
     return (
       <View style={styles.container}>
-        <Header profile={profile} />
+        <Header profile={profile} devLog={() => this.storybook()} />
         <View style={styles.contentList}>
           <ContactsListView
             list={list}
