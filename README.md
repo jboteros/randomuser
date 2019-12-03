@@ -8,9 +8,10 @@ This is a technical test on React Native developed by Johnatan Botero
 API: https://randomuser.me/
 
 ## Main Funcionalities
-
+#### List
 - List of contacts wiht basic informatio
-- List of contacts with Linking Cell, Email and Address
+- List of contacts with Linking Cel, phone, Email and Address
+#### Detail
 - Detail of contact with picture update
 - Detail of contact with Linking Cell, Phone, Cell, Address and email
 - Detail of contact with pin of location on Google Maps and Linking to external gps App
