@@ -63,7 +63,8 @@ npm run android
 ## Items
 - Video: https://www.dropbox.com/s/xr2pwmvstib02kx/Screen%20Recording%202019-11-29%20at%204.07.44%20PM.mov?dl=0
 
-- bundle aab: https://www.dropbox.com/s/37cuwkers72c5js/randomuserBuild.aab?dl=0
+- TestFlight iOS: https://testflight.apple.com/join/1LCkgLoi (Public Link)
+- Bundle aab: https://www.dropbox.com/s/37cuwkers72c5js/randomuserBuild.aab?dl=0
 - Release apk: https://www.dropbox.com/s/sw6lhs88ivnhmyt/randomuserRelease.apk?dl=0
 
 ## Home
