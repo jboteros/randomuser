@@ -1,3 +1,5 @@
+[![Build status](https://build.appcenter.ms/v0.1/apps/3ee7d761-6c02-412a-acc4-69ab474e0600/branches/master/badge)](https://appcenter.ms)
+
 # randomuser
 randomuser.me + React Native by Johntatan Botero (johnatan@jbotero.com)
 
