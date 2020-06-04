@@ -12,7 +12,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   mapContainer: {
-    width: Metrics.screenWidth * 0.8,
+    width: Metrics.screenWidth * 0.9,
     alignSelf: 'center',
     overflow: 'hidden',
     backgroundColor: Colors.light,

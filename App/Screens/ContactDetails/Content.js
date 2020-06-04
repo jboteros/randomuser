@@ -7,11 +7,13 @@ import {
   Platform,
   TouchableOpacity,
   Linking,
+  StyleSheet,
 } from 'react-native';
 
 import moment from 'moment';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import IconFont from 'react-native-vector-icons/FontAwesome';
 
 import ImagePicker from 'react-native-image-picker';
 import HeaderNavigation from '../../Components/HeaderNavigation';
@@ -34,11 +36,19 @@ const options = {
   },
 };
 
+
+
 export default class ContactDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {favorito:false};
   }
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   if (nextProps.favoritos!==this.props.favoritos) {
+  //     return true;
+  //   }
+  // }
 
   async openModalPic() {
     const {setLoading, navigation} = this.props;
@@ -111,8 +121,27 @@ export default class ContactDetails extends Component {
     Linking.openURL(url);
   }
 
+  addFavorito(){
+    const {navigation, favoritos, setFavoritos} = this.props;
+    const {
+      email,
+    } = navigation.state.params;
+    console.log("Agregar a Favoritos");
+    setFavoritos(navigation.state.params);
+  }
+
+  deleteFavorito(){
+    const {navigation, favoritos, deleteFavoritos} = this.props;
+    const {
+      email,
+    } = navigation.state.params;
+    console.log("Eliminar de Favoritos");
+    deleteFavoritos(navigation.state.params);
+    
+  }
+
   render() {
-    const {navigation, loading} = this.props;
+    const {navigation, loading, favoritos} = this.props;
     const {
       gender,
       cell,
@@ -124,17 +153,39 @@ export default class ContactDetails extends Component {
       picture,
     } = navigation.state.params;
 
+    const {favorito} = this.state;
+
     const {age, date} = dob;
     const {first, last} = name;
 
     const {coordinates} = location;
     const {latitude, longitude} = coordinates;
 
+    
+    var colorGender;
+    if (gender==='male') {
+      colorGender='#3DABDC';
+    }
+    else{
+      colorGender='#822663';
+    }
+
+    const stylesContent = StyleSheet.create({
+      fondo: {
+        //backgroundColor: (gender === 'male') ? '#3DABDC':'#D03EA0',
+      },
+      borde: {
+        borderColor: colorGender,
+      },
+
+    })
+
     return (
       <View style={styles.container}>
         <View style={styles.contentList}>
           <View style={[styles.image, ApplicationStyles.shadown]}>
             <View style={styles.imageBg} />
+            <View style={stylesContent.imagenFondo}></View>
             <Image
               opacity={0.5}
               blurRadius={Platform.OS === 'ios' ? 5 : 1}
@@ -146,8 +197,8 @@ export default class ContactDetails extends Component {
               resizeMode={FastImage.resizeMode.cover}
             />
             <View style={styles.ovalContainer}>
-              <View style={styles.ovalItem}>
-                <View style={styles.itemBasic}>
+              <View style={[styles.ovalItem, stylesContent.fondo]}>
+                <View style={[styles.itemBasic, styles.itemBasicleft]}>
                   <Icon name={gender} size={24} color={'white'} />
                   <Text
                     style={Fonts.style.regular(
@@ -158,7 +209,7 @@ export default class ContactDetails extends Component {
                     Gender
                   </Text>
                 </View>
-                <View style={styles.itemBasic}>
+                <View style={[styles.itemBasic, styles.itemBasicright]}>
                   <Text
                     style={Fonts.style.bold(
                       Colors.light,
@@ -182,7 +233,7 @@ export default class ContactDetails extends Component {
                   this.openModalPic();
                 }}>
                 <FastImage
-                  style={styles.imageSmall}
+                  style={[styles.imageSmall, stylesContent.borde]}
                   source={{
                     uri: this.validatePicture(email, picture.large),
                     priority: FastImage.priority.normal,
@@ -210,15 +261,33 @@ export default class ContactDetails extends Component {
                   this.dialNumber(cell);
                 }}
                 style={styles.ctaItem}>
-                <Icon name={'mobile-alt'} size={24} color={'rgb(0,98,150)'} />
+                <Icon name={'mobile-alt'} size={24} color={colorGender} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
                   this.sendEmail();
                 }}
                 style={styles.ctaItem}>
-                <Icon name={'envelope'} size={24} color={'rgb(0,98,150)'} />
+                <Icon name={'envelope'} size={24} color={colorGender} />
               </TouchableOpacity>
+              {favoritos.includes(navigation.state.params)  ? 
+                <TouchableOpacity
+                onPress={() => {
+                  this.deleteFavorito();
+                }}
+                style={styles.ctaItem}>
+                <IconFont name={'star'} size={24} color={colorGender} />
+              </TouchableOpacity>
+              :
+              <TouchableOpacity
+                onPress={() => {
+                  this.addFavorito();
+                }}
+                style={styles.ctaItem}>
+                <IconFont name={'star-o'} size={24} color={colorGender} />
+              </TouchableOpacity>
+              }
+              
             </View>
           </View>
           <ScrollView style={styles.itemsContact}>
@@ -226,25 +295,29 @@ export default class ContactDetails extends Component {
               icon={'phone'}
               title={'Phone:'}
               value={phone}
+              color={colorGender}
               action={() => this.dialNumber(phone)}
             />
             <ItemContact
               icon={'mobile-alt'}
               title={'Cell:'}
               value={cell}
+              color={colorGender}
               action={() => this.dialNumber(cell)}
             />
             <ItemContact
               icon={'birthday-cake'}
               title={'Birthday:'}
               value={`${moment(date).format('LL')}, ${age} years old`}
-              action={() => this.goLocation()}
+              color={colorGender}
+              action={() => this.sendEmail()}
             />
             <ItemContact
               icon={'map-marker-alt'}
               title={'Location:'}
               // eslint-disable-next-line prettier/prettier
               value={`${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`}
+              color={colorGender}
               action={() => this.goLocation()}
             />
             <MapView

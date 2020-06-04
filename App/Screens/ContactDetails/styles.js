@@ -14,6 +14,12 @@ export default {
     height: 80,
     width: 80,
   },
+  itemBasicleft:{
+    paddingRight: 25,
+  },
+  itemBasicright:{
+    paddingLeft: 25,
+  },
   ovalContainer: {
     alignContent: 'center',
     justifyContent: 'center',
@@ -24,7 +30,8 @@ export default {
     width: Metrics.screenWidth * 0.6,
     borderRadius: 40,
     height: 80,
-    backgroundColor: Colors.accentMask(0.5),
+    //backgroundColor: Colors.accentMask(0.5),
+    //backgroundColor: '#000000',
     position: 'absolute',
     flexDirection: 'row',
   },
@@ -58,7 +65,7 @@ export default {
     height: 80,
     position: 'absolute',
 
-    bottom: -40,
+    bottom: -16,
     flexDirection: 'row',
   },
   ctaItem: {
@@ -68,7 +75,7 @@ export default {
     marginHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.light,
+    //backgroundColor: Colors.light,
   },
   contentList: {
     flex: 1,

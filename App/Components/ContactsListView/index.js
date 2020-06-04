@@ -33,11 +33,15 @@ export default class ContactsListView extends Component {
       isRefreshing,
       onRefresh,
       pictures,
+      favoritos,
+      setFavoritos,
+      deleteFavoritos,
     } = this.props;
 
 
     return (
       <InfiniteScrollView
+        //style={styles.fondo}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
@@ -56,6 +60,9 @@ export default class ContactsListView extends Component {
               key={index}
               item={item}
               pictures={pictures}
+              favoritos={favoritos}
+              setFavoritos={setFavoritos}
+              deleteFavoritos={deleteFavoritos}
               onPressedCell={() => {
                 this.props.onPressedCell(item);
               }}

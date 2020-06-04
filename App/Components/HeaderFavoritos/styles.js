@@ -20,7 +20,9 @@ export default StyleSheet.create({
     borderRadius: Metrics.images.medium / 2,
   },
   header: {
-    paddingLeft: '13%',
-    width: '100%'
+    flex: 1,
+    flexDirection: 'column',
+    //paddingLeft: '13%',
+    height: 50,
   }
 });
