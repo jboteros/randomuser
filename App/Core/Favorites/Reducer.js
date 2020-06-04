@@ -10,7 +10,7 @@ const addContactCells = (state = initialState, {payload}) => {
     const isCellAdded = !!state.favoritesContactCells.find(item => item === cellToOperate)
     const newFavoritesContactCells = [...state.favoritesContactCells, cellToOperate]
 
-    if (isCellAdded) {
+    if (!isCellAdded) {
         return {
             favoritesContactCells: newFavoritesContactCells
         };

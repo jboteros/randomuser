@@ -21,6 +21,8 @@ import MapView from '../../Components/MapView';
 import styles from './styles';
 import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 import Loading from '../../Components/Loading';
+import FavoriteFlat from '../../Images/svg/favorite_flat'
+import Favorite from '../../Images/svg/favorite'
 
 const options = {
   title: 'Update contact picture',
@@ -111,8 +113,28 @@ export default class ContactDetails extends Component {
     Linking.openURL(url);
   }
 
+  setAsFavorite = () => {
+    const { cell } = this.props.navigation.state.params;
+    this.props.setAsFavorite(cell)
+  }
+
+  removeAsFavorite = () => {
+    const { cell } = this.props.navigation.state.params;
+    this.props.removeAsFavorite(cell)
+  }
+
+  favoriteButtonHandle = (isFavorite) => {
+    const { state, removeAsFavorite, setAsFavorite } = this
+
+    if (isFavorite) {
+      removeAsFavorite()
+    } else {
+      setAsFavorite()
+    }
+  }
+
   render() {
-    const {navigation, loading} = this.props;
+    const {navigation, loading, favoritesCells} = this.props;
     const {
       gender,
       cell,
@@ -129,6 +151,7 @@ export default class ContactDetails extends Component {
 
     const {coordinates} = location;
     const {latitude, longitude} = coordinates;
+    const isFavoriteContact = !!favoritesCells.find(item => item === cell)
 
     return (
       <View style={styles.container}>
@@ -205,6 +228,7 @@ export default class ContactDetails extends Component {
             </Text>
 
             <View style={styles.ctaContainer}>
+
               <TouchableOpacity
                 onPress={() => {
                   this.dialNumber(cell);
@@ -212,6 +236,17 @@ export default class ContactDetails extends Component {
                 style={styles.ctaItem}>
                 <Icon name={'mobile-alt'} size={24} color={'rgb(0,98,150)'} />
               </TouchableOpacity>
+
+              <TouchableOpacity
+                  onPress={() => this.favoriteButtonHandle(isFavoriteContact)}
+                  style={styles.ctaItem}>
+                {
+                  isFavoriteContact ?
+                      <Favorite height={24} width={24} color={'rgb(0,98,150)'} />
+                      : <FavoriteFlat height={24} width={24} color={'rgb(0,98,150)'} />
+                }
+              </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() => {
                   this.sendEmail();
@@ -219,6 +254,7 @@ export default class ContactDetails extends Component {
                 style={styles.ctaItem}>
                 <Icon name={'envelope'} size={24} color={'rgb(0,98,150)'} />
               </TouchableOpacity>
+
             </View>
           </View>
           <ScrollView style={styles.itemsContact}>

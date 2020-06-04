@@ -11,6 +11,7 @@ export default StyleSheet.create({
     width: '95%',
     backgroundColor: Colors.soft,
     paddingHorizontal: 10,
+    position: 'relative'
   },
   image: {
     width: Metrics.images.medium,
@@ -31,4 +32,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   iconsItem: {marginHorizontal: 10},
+  favoriteIcon: {
+    position: 'absolute',
+    top: 0,
+    right: 15
+  }
 });
