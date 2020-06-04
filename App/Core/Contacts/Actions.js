@@ -11,16 +11,7 @@ export const getProfile = () => async dispatch => {
   });
 
   const result = await api.get();
-  const contacts = result.data.results.map(item => {
-    return new Promise(resolve => {
-      resolve({
-        ...item,
-      });
-    });
-  });
-  Promise.all(contacts).then(response => {
-    return dispatch({type: GET_PROFILE, payload: response[0]});
-  });
+  dispatch({type: GET_PROFILE, payload: result.data.results[0]});
 };
 
 export const getContacts = (page, results) => async dispatch => {
@@ -33,16 +24,8 @@ export const getContacts = (page, results) => async dispatch => {
   });
 
   const result = await api.get();
-  const contacts = result.data.results.map(item => {
-    return new Promise(resolve => {
-      resolve({
-        ...item,
-      });
-    });
-  });
 
   const info = result.data.info;
-  Promise.all(contacts).then(list => {
-    return dispatch({type: GET_CONTACTS, payload: {list, info}});
-  });
+  const list = result.data.results
+  dispatch({type: GET_CONTACTS, payload: {list, info}});
 };
