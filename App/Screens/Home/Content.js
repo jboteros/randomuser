@@ -10,7 +10,10 @@ import styles from './styles';
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {loadingContacts: false};
+    this.state = {
+      loadingContacts: false,
+      favoriteView: false
+    };
   }
 
   async componentDidMount() {
@@ -48,17 +51,39 @@ export default class Home extends Component {
     });
   }
 
+  switcherFavoriteView = () => {
+    this.setState({
+      favoriteView: !this.state.favoriteView
+    })
+  }
+
+  getFavoriteItems = () => {
+    const { favoritesCells, list } = this.props
+    const results = []
+
+    for (const cell of favoritesCells) {
+      const value = list.find(listItem => listItem.cell === cell)
+      if (value) {
+        results.push(value)
+      }
+    }
+
+    return results
+  }
+
   render() {
     const {loading, profile, pictures, list, navigation} = this.props;
-    const {loadingContacts} = this.state;
+    const {loadingContacts, favoriteView} = this.state;
+
+    const listOfValuesToRender = favoriteView ? this.getFavoriteItems() : list
 
     return (
       <View style={styles.container}>
-        <Header profile={profile} />
+        <Header profile={profile} isFavorite={favoriteView} onFavorite={this.switcherFavoriteView} />
         <View style={styles.contentList}>
           <ContactsListView
-            list={list}
-            contacts={list}
+            list={listOfValuesToRender}
+            contacts={listOfValuesToRender}
             currentLocation={this.props.currentLocation}
             moreContacts={true}
             pictures={pictures}
