@@ -3,6 +3,8 @@ import {View, StatusBar} from 'react-native';
 
 import Header from '../../Components/Header';
 import ContactsListView from '../../Components/ContactsListView';
+import ContactsCardstView from '../../Components/ContactCardsView';
+
 import Loading from '../../Components/Loading';
 
 import styles from './styles';
@@ -12,7 +14,8 @@ export default class Home extends Component {
     super(props);
     this.state = {
       loadingContacts: false,
-      favoriteView: false
+      favoriteView: false,
+      listView: false
     };
   }
 
@@ -57,6 +60,12 @@ export default class Home extends Component {
     })
   }
 
+  switcherViewType = () => {
+    this.setState({
+       listView: !this.state.listView
+    })
+  }
+
   getFavoriteItems = () => {
     const { favoritesCells, list } = this.props
     const results = []
@@ -73,35 +82,44 @@ export default class Home extends Component {
 
   render() {
     const {loading, profile, pictures, list, navigation} = this.props;
-    const {loadingContacts, favoriteView} = this.state;
+    const {loadingContacts, favoriteView, listView} = this.state;
 
     const listOfValuesToRender = favoriteView ? this.getFavoriteItems() : list
+    const allProps = {
+      list: listOfValuesToRender,
+      contacts: listOfValuesToRender,
+      currentLocation: this.props.currentLocation,
+      moreContacts: true,
+      pictures: pictures,
+      loading: loadingContacts,
+      onLoadContacts: () => {
+        this.loadContacts();
+      },
+      isRefreshing: loadingContacts,
+      onRefresh: () => {
+        this.onRefresh();
+      },
+      onPressedCell: rowData => {
+        navigation.navigate('ContactDetails', rowData);
+      },
+      specialSearch: this.state.specialSearch && this.state.isSearchingMode
+    }
 
     return (
       <View style={styles.container}>
-        <Header profile={profile} isFavorite={favoriteView} onFavorite={this.switcherFavoriteView} />
+        <Header
+            isLayoutList={listView}
+            onLayout={this.switcherViewType}
+            profile={profile}
+            isFavorite={favoriteView}
+            onFavorite={this.switcherFavoriteView}
+        />
         <View style={styles.contentList}>
-          <ContactsListView
-            list={listOfValuesToRender}
-            contacts={listOfValuesToRender}
-            currentLocation={this.props.currentLocation}
-            moreContacts={true}
-            pictures={pictures}
-            loading={loadingContacts}
-            onLoadContacts={() => {
-              this.loadContacts();
-            }}
-            isRefreshing={loadingContacts}
-            onRefresh={() => {
-              this.onRefresh();
-            }}
-            onPressedCell={rowData => {
-              navigation.navigate('ContactDetails', rowData);
-            }}
-            specialSearch={
-              this.state.specialSearch && this.state.isSearchingMode
-            }
-          />
+          {
+            listView ?
+                <ContactsCardstView {...allProps} /> :
+                <ContactsListView {...allProps} />
+          }
         </View>
         <Loading loading={loading} />
       </View>

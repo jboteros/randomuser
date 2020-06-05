@@ -2,13 +2,15 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import StarFlat from '../../Images/svg/favorite_flat'
 import Star from '../../Images/svg/favorite'
+import ItemsIcon from '../../Images/svg/items'
+import ListIcon from '../../Images/svg/list'
 
 import FastImage from 'react-native-fast-image';
 
 import {Fonts, Colors, ApplicationStyles} from '../../Themes';
 import styles from './styles';
 
-export default ({ profile, onFavorite, isFavorite }) => {
+export default ({ profile, onFavorite, isFavorite, isLayoutList, onLayout }) => {
   if (profile == null) {
     return null;
   }
@@ -39,6 +41,21 @@ export default ({ profile, onFavorite, isFavorite }) => {
           />
       </View>
       <View style={styles.layout}>
+          <View style={styles.layoutController}>
+              <TouchableOpacity onPress={onLayout}>
+                  <ItemsIcon height={22} width={22} color={!isLayoutList ?
+                      Colors.accentColorLight :
+                      Colors.gray
+                  } />
+              </TouchableOpacity>
+
+              <TouchableOpacity  onPress={onLayout}>
+                  <ListIcon height={22} width={22} color={isLayoutList ?
+                      Colors.accentColorLight :
+                      Colors.gray
+                  } />
+              </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={onFavorite} >
               {
                   isFavorite ?

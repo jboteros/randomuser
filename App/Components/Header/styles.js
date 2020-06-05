@@ -20,8 +20,9 @@ export default StyleSheet.create({
     width: '100%',
     height: 35,
     paddingHorizontal: Metrics.screenWidth * 0.075,
-    backgroundColor: Colors.soft,
-    flexDirection: 'row-reverse',
+    backgroundColor: Colors.light,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   image: {
@@ -31,4 +32,9 @@ export default StyleSheet.create({
     height: Metrics.images.medium,
     borderRadius: Metrics.images.medium / 2,
   },
+  layoutController: {
+    width: 65,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  }
 });

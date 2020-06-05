@@ -67,7 +67,7 @@ export default data => {
         </Text>
         <Text
           style={Fonts.style.regular(Colors.dark, Fonts.size.small, 'left')}>
-          {email}
+          {cell}
         </Text>
       </View>
       <View style={styles.iconsContainer}>
