@@ -40,4 +40,6 @@ target 'randomuser' do
   pod 'Google-Maps-iOS-Utils'
 
   use_native_modules!
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end
