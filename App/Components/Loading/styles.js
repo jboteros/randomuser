@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {Metrics} from '../../Themes';
+import {Metrics, Colors} from '../../Themes';
 export default StyleSheet.create({
   container: {
     width: Metrics.screenWidth,
     height: Metrics.screenHeight,
     position: 'absolute',
-    backgroundColor: '#F43556',
+    backgroundColor: Colors.accentMask(0.7),
   },
 });

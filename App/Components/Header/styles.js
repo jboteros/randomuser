@@ -2,13 +2,14 @@ import {StyleSheet} from 'react-native';
 import {Metrics, Colors} from '../../Themes';
 export default StyleSheet.create({
   container: {
-    paddingTop: Metrics.addHeader + 10,
-    paddingBottom: 10,
+    height: Metrics.header,
+    paddingTop: Metrics.addHeader,
     justifyContent: 'space-between',
+    //  borderRadius: Metrics.borderRadius,
     alignItems: 'center',
     width: '100%',
     flexDirection: 'row',
-    backgroundColor: '#F43556',
+    backgroundColor: Colors.accentColor,
     paddingHorizontal: Metrics.screenWidth * 0.075,
   },
   image: {

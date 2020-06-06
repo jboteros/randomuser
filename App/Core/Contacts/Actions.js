@@ -33,7 +33,16 @@ export const getContacts = (page, results) => async dispatch => {
   });
 
   const result = await api.get();
+  const contacts = result.data.results.map(item => {
+    return new Promise(resolve => {
+      resolve({
+        ...item,
+      });
+    });
+  });
+
   const info = result.data.info;
-  const list = result.data.results;
-  dispatch({type: GET_CONTACTS, payload: {list, info}});
+  Promise.all(contacts).then(list => {
+    return dispatch({type: GET_CONTACTS, payload: {list, info}});
+  });
 };

@@ -1,6 +1,6 @@
 import {createReducer} from '../Config';
 import {SET_PICTURES} from './Types';
-import orderBy from 'lodash/orderBy';
+import R from 'lodash';
 
 const initialState = {
   pictures: [],
@@ -10,7 +10,7 @@ const setPictures = (state = initialState, {payload}) => {
   let data = [...state.pictures, payload];
   return {
     ...state,
-    pictures: orderBy(data, 'timestamp', 'desc'),
+    pictures: R.orderBy(data, 'timestamp', 'desc'),
   };
 };
 

@@ -14,13 +14,12 @@ export default class Home extends Component {
   }
 
   async componentDidMount() {
-    const {setLoading, getProfile, getFavorites} = this.props;
+    const {setLoading, getProfile} = this.props;
 
     StatusBar.setBarStyle('light-content', false);
 
     setLoading(true);
     await getProfile();
-    await getFavorites();
     this.onRefresh();
     setLoading(false);
   }

@@ -1,27 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   View,
+  Image,
   Text,
   ScrollView,
   Platform,
   TouchableOpacity,
   Linking,
-  SafeAreaView,
 } from 'react-native';
+
+import moment from 'moment';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import * as Animatable from 'react-native-animatable';
+
 import ImagePicker from 'react-native-image-picker';
+import HeaderNavigation from '../../Components/HeaderNavigation';
+import ItemContact from '../../Components/ItemContact';
 import MapView from '../../Components/MapView';
 
 import styles from './styles';
-import format from 'date-fns/format';
-import {connect} from 'react-redux';
-import {
-  getFavorites,
-  saveFavorite,
-  deleteFavorite,
-} from '../../Core/Favorites/Actions';
+import {Fonts, Colors, ApplicationStyles} from '../../Themes';
+import Loading from '../../Components/Loading';
 
 const options = {
   title: 'Update contact picture',
@@ -35,44 +34,36 @@ const options = {
   },
 };
 
-const ContactDetails = props => {
-  const {navigation, favorites} = props;
-  const {
-    cell,
-    dob,
-    email,
-    location,
-    name,
-    phone,
-    picture,
-    login,
-  } = navigation.state.params;
-  const {age, date} = dob;
-  const {first, last} = name;
-  const {coordinates, street, city, state, country} = location;
-  const {latitude, longitude} = coordinates;
-  const [isFavorite, setIsFavorite] = useState(false);
+export default class ContactDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-  async function openModalPic() {
-    const {setLoading} = props;
+  async openModalPic() {
+    const {setLoading, navigation} = this.props;
+    const {email} = navigation.state.params;
 
     setLoading(true);
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
+        console.log('User cancelled image picker');
         setLoading(false);
       } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
         setLoading(false);
       } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
         setLoading(false);
       } else {
         let data = {email, ...response};
-        saveImage(data);
+        this.saveImage(data);
       }
     });
   }
 
-  function validatePicture(email, image) {
-    const {pictures} = props;
+  validatePicture(email, image) {
+    const {pictures} = this.props;
 
     let idex = pictures.findIndex(i => i.email === email);
 
@@ -83,13 +74,13 @@ const ContactDetails = props => {
     }
   }
 
-  async function saveImage(data) {
-    const {setLoading, setPictures} = props;
+  async saveImage(data) {
+    const {setLoading, setPictures} = this.props;
     await setPictures(data);
     setLoading(false);
   }
 
-  function dialNumber(number) {
+  dialNumber(number) {
     let phoneNumber = '';
     if (Platform.OS === 'android') {
       phoneNumber = `tel:${number}`;
@@ -99,14 +90,19 @@ const ContactDetails = props => {
     Linking.openURL(phoneNumber);
   }
 
-  function sendEmail() {
+  sendEmail() {
+    const {navigation} = this.props;
+    const {email} = navigation.state.params;
     Linking.openURL(`mailto:${email}`);
   }
 
-  function goLocation() {
-    const label = `${location.street.number} ${location.street.name}, ${
-      location.city
-    } ${location.state}, ${location.country}`;
+  goLocation() {
+    const {navigation} = this.props;
+    const {location} = navigation.state.params;
+    const {coordinates} = location;
+    const {latitude, longitude} = coordinates;
+    // eslint-disable-next-line prettier/prettier
+    const label = `${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`;
 
     const url = Platform.select({
       ios: 'maps:' + latitude + ',' + longitude + '?q=' + label,
@@ -115,178 +111,157 @@ const ContactDetails = props => {
     Linking.openURL(url);
   }
 
-  async function addToFavorite() {
-    if (isFavorite) {
-      props.deleteFavorite(props.navigation.state.params);
-    } else {
-      props.saveFavorite(props.navigation.state.params);
-    }
-    setIsFavorite(!isFavorite);
-  }
+  render() {
+    const {navigation, loading} = this.props;
+    const {
+      gender,
+      cell,
+      dob,
+      email,
+      location,
+      name,
+      phone,
+      picture,
+    } = navigation.state.params;
 
-  function verifyFavorite() {
-    const favorite = favorites.filter(d => d.login.uuid === login.uuid);
-    setIsFavorite(favorite.length > 0);
-  }
+    const {age, date} = dob;
+    const {first, last} = name;
 
-  useEffect(() => {
-    verifyFavorite();
-  }, []);
+    const {coordinates} = location;
+    const {latitude, longitude} = coordinates;
 
-  return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.safeAreaContainer}>
-        <ScrollView>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.header}>
-            <Icon name="chevron-left" size={24} color="white" />
-          </TouchableOpacity>
-          <Animatable.View
-            style={{alignItems: 'center'}}
-            animation="bounceInUp"
-            iterationCount={1}
-            duration={1700}
-            direction="alternate"
-            style={styles.informationContainer}>
-            <View style={styles.cardInformation}>
-              <View
-                style={{alignItems: 'center'}}>
-                <TouchableOpacity
-                  onPress={() => openModalPic()}
-                  style={styles.imageContainer}>
-                  <FastImage
-                    style={styles.imageSmall}
-                    source={{
-                      uri: validatePicture(email, picture.large),
-                      priority: FastImage.priority.normal,
-                    }}
-                    resizeMode={FastImage.resizeMode.cover}
-                  />
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.contactName}>{`${first} ${last}`}</Text>
-              <View style={styles.actionsContainer}>
-                <TouchableOpacity
-                  onPress={() => dialNumber(cell)}
-                  style={styles.actionButton}>
-                  <Icon name="phone" size={24} color="#F43556" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => sendEmail()}
-                  style={styles.actionButton}>
-                  <Icon name="envelope" size={24} color="#F43556" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => addToFavorite()}
-                  style={[styles.actionButton, {padding: 9}]}>
-                  {isFavorite ? (
-                    <Animatable.View
-                      animation="bounceIn"
-                      iterationCount={1}
-                      direction="alternate">
-                      <Icon name="star" solid size={24} color="#F43556" />
-                    </Animatable.View>
-                  ) : (
-                    <Icon name="star" size={24} color="#F43556" />
-                  )}
-                </TouchableOpacity>
-              </View>
-              <View style={styles.informationCardBody}>
-                <View style={styles.cardBody}>
-                  <View style={styles.iconContainer}>
-                    <Icon name="phone" size={24} color={styles.icon.color} />
-                  </View>
-                  <Text numberOfLines={1} style={styles.cardBodyText}>
-                    {phone}
+    return (
+      <View style={styles.container}>
+        <View style={styles.contentList}>
+          <View style={[styles.image, ApplicationStyles.shadown]}>
+            <View style={styles.imageBg} />
+            <Image
+              opacity={0.5}
+              blurRadius={Platform.OS === 'ios' ? 5 : 1}
+              style={styles.imageBg}
+              source={{
+                uri: this.validatePicture(email, picture.thumbnail),
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.cover}
+            />
+            <View style={styles.ovalContainer}>
+              <View style={styles.ovalItem}>
+                <View style={styles.itemBasic}>
+                  <Icon name={gender} size={24} color={'white'} />
+                  <Text
+                    style={Fonts.style.regular(
+                      Colors.light,
+                      Fonts.size.small,
+                      'left',
+                    )}>
+                    Gender
                   </Text>
                 </View>
-                <View style={styles.cardBody}>
-                  <View style={styles.iconContainer}>
-                    <Icon
-                      name="mobile-alt"
-                      size={24}
-                      color={styles.icon.color}
-                    />
-                  </View>
-                  <Text numberOfLines={1} style={styles.cardBodyText}>
-                    {cell}
+                <View style={styles.itemBasic}>
+                  <Text
+                    style={Fonts.style.bold(
+                      Colors.light,
+                      Fonts.size.input,
+                      'left',
+                    )}>
+                    {age}
+                  </Text>
+                  <Text
+                    style={Fonts.style.regular(
+                      Colors.light,
+                      Fonts.size.small,
+                      'left',
+                    )}>
+                    Age
                   </Text>
                 </View>
               </View>
-              <View style={styles.informationCardBody}>
-                <View style={styles.cardBody}>
-                  <View style={styles.iconContainer}>
-                    <Icon
-                      name="birthday-cake"
-                      size={30}
-                      color={styles.icon.color}
-                    />
-                  </View>
-                  <Text numberOfLines={2} style={styles.cardBodyText}>
-                    {`${format(
-                      new Date(date),
-                      'MMM d yyyy',
-                    )}, ${age} years old`}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.informationCardBody}>
-                <View style={styles.cardBody}>
-                  <View style={styles.iconContainer}>
-                    <Icon name="envelope" size={30} color={styles.icon.color} />
-                  </View>
-                  <Text numberOfLines={2} style={styles.cardBodyText}>
-                    {email}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.informationCardBody}>
-                <View style={styles.cardBody}>
-                  <View style={styles.iconContainer}>
-                    <Icon
-                      name="map-marker-alt"
-                      size={30}
-                      color={styles.icon.color}
-                    />
-                  </View>
-                  <Text numberOfLines={3} style={styles.cardBodyText}>
-                    {`${street.number} ${
-                      street.name
-                    }, ${city} ${state}, ${country}`}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.mapContainer}>
-                <MapView
-                  customStyle={styles.map}
-                  coordinates={{latitude, longitude}}
-                  action={() => goLocation()}
+              <TouchableOpacity
+                onPress={() => {
+                  this.openModalPic();
+                }}>
+                <FastImage
+                  style={styles.imageSmall}
+                  source={{
+                    uri: this.validatePicture(email, picture.large),
+                    priority: FastImage.priority.normal,
+                  }}
+                  resizeMode={FastImage.resizeMode.cover}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </Animatable.View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
-  );
-};
+            <Text
+              style={Fonts.style.bold(Colors.light, Fonts.size.medium, 'left')}>
+              {first} {last}
+            </Text>
+            <Text
+              style={Fonts.style.regular(
+                Colors.light,
+                Fonts.size.small,
+                'left',
+              )}>
+              {email}
+            </Text>
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getFavorites: () => dispatch(getFavorites()),
-    saveFavorite: data => dispatch(saveFavorite(data)),
-    deleteFavorite: data => dispatch(deleteFavorite(data)),
-  };
-};
+            <View style={styles.ctaContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.dialNumber(cell);
+                }}
+                style={styles.ctaItem}>
+                <Icon name={'mobile-alt'} size={24} color={'rgb(0,98,150)'} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  this.sendEmail();
+                }}
+                style={styles.ctaItem}>
+                <Icon name={'envelope'} size={24} color={'rgb(0,98,150)'} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <ScrollView style={styles.itemsContact}>
+            <ItemContact
+              icon={'phone'}
+              title={'Phone:'}
+              value={phone}
+              action={() => this.dialNumber(phone)}
+            />
+            <ItemContact
+              icon={'mobile-alt'}
+              title={'Cell:'}
+              value={cell}
+              action={() => this.dialNumber(cell)}
+            />
+            <ItemContact
+              icon={'birthday-cake'}
+              title={'Birthday:'}
+              value={`${moment(date).format('LL')}, ${age} years old`}
+              action={() => this.goLocation()}
+            />
+            <ItemContact
+              icon={'map-marker-alt'}
+              title={'Location:'}
+              // eslint-disable-next-line prettier/prettier
+              value={`${location.street.number} ${location.street.name}, ${location.city} ${location.state}, ${location.country}`}
+              action={() => this.goLocation()}
+            />
+            <MapView
+              coordinates={{latitude, longitude}}
+              action={() => this.goLocation()}
+            />
 
-const mapStateToProps = ({favorites}) => {
-  return {
-    favorites: favorites.list,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ContactDetails);
+            <View style={styles.marginScroll} />
+          </ScrollView>
+        </View>
+        <HeaderNavigation
+          goBack={() => {
+            navigation.goBack();
+          }}
+        />
+        <Loading loading={loading} />
+      </View>
+    );
+  }
+}

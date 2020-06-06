@@ -12,19 +12,19 @@ const ASPECT_RATIO = Metrics.screenWidth / Metrics.screenHeight;
 const LATITUDE_DELTA = 25;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 export default data => {
-  const {coordinates, customStyle} = data;
+  const {coordinates} = data;
 
   return (
     <TouchableOpacity
       onPress={() => data.action()}
       pointerEvents={'none'}
-      style={[styles.mapContainer, ApplicationStyles.shadown, customStyle]}>
+      style={[styles.mapContainer, ApplicationStyles.shadown]}>
       <MapView
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={{
           ...StyleSheet.absoluteFillObject,
         }}
-        customMapStyle={[mapStyle]}
+        customMapStyle={mapStyle}
         region={{
           latitude: parseFloat(coordinates.latitude),
           longitude: parseFloat(coordinates.longitude),

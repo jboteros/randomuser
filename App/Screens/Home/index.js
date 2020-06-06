@@ -4,7 +4,6 @@ import Content from './Content';
 
 import {setLoading} from '../../Core/UI/Actions';
 import {getContacts, getProfile} from '../../Core/Contacts/Actions';
-import {getFavorites, saveFavorite} from '../../Core/Favorites/Actions';
 
 const mapStateToProps = ({ui, contacts, pics}) => {
   const {loading} = ui;
@@ -24,8 +23,6 @@ const mapDispatchToProps = dispatch => {
     setLoading: state => dispatch(setLoading(state)),
     getContacts: (page, results) => dispatch(getContacts(page, results)),
     getProfile: () => dispatch(getProfile()),
-    getFavorites: () => dispatch(getFavorites()),
-    saveFavorite: (data) => dispatch(saveFavorite(data)),
   };
 };
 

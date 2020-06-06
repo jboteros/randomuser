@@ -1,89 +1,87 @@
-import {Colors} from '../../Themes';
+import {Metrics, Colors} from '../../Themes';
+
 export default {
   container: {
-    backgroundColor: '#F43556',
     flex: 1,
-  },
-  safeAreaContainer: {
-    flex: 1,
-  },
-  header: {
-    paddingLeft: 20,
-    paddingTop: 10,
-    alignItems: 'flex-start',
-  },
-  informationContainer: {alignItems: 'center', paddingTop: 90},
-  cardInformation: {
-    backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    width: '100%',
-    height: '100%',
+    width: Metrics.screenWidth,
+
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  imageContainer: {position: 'absolute', marginTop: -60},
-  imageSmall: {
-    width: 140,
-    height: 140,
-    borderRadius: 140,
-    borderWidth: 5,
-    borderColor: 'white',
-    backgroundColor: Colors.accentMask(1.0),
-  },
-  contactName: {
-    color: '#2f3a4e',
-    fontSize: 25,
-    marginTop: 70,
-    paddingVertical: 10,
-  },
-  actionsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '90%',
-    paddingBottom: 30,
-  },
-  actionButton: {
-    padding: 10,
-    borderRadius: 30,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  iconContainer: {
-    width: 30,
+  itemBasic: {
+    justifyContent: 'center',
     alignItems: 'center',
+    height: 80,
+    width: 80,
+  },
+  ovalContainer: {
+    alignContent: 'center',
     justifyContent: 'center',
   },
-  icon: {
-    color: '#2f3a4e',
-  },
-  informationCardBody: {
-    flexDirection: 'column',
-    width: '80%',
-  },
-  cardBody: {
+  ovalItem: {
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    width: Metrics.screenWidth * 0.6,
+    borderRadius: 40,
+    height: 80,
+    backgroundColor: Colors.accentMask(0.5),
+    position: 'absolute',
     flexDirection: 'row',
-    width: '100%',
-    paddingBottom: 15,
   },
-  cardBodyText: {
-    color: '#2f3a4e',
-    fontSize: 15,
-    paddingLeft: 10,
+  image: {
+    zIndex: 1000,
+    width: Metrics.screenWidth,
+    height: Metrics.screenWidth * 0.8,
+    backgroundColor: Colors.light,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageBg: {
+    width: Metrics.screenWidth,
+    height: '100%',
+    backgroundColor: Colors.dark,
+    position: 'absolute',
+  },
+  imageSmall: {
+    marginVertical: 10,
+    width: Metrics.images.logo,
+    height: Metrics.images.logo,
+    borderRadius: Metrics.images.logo,
+    borderWidth: 5,
+    borderColor: Colors.accentMask(1.0),
+    backgroundColor: Colors.accentMask(1.0),
+  },
+  marginScroll: {height: Metrics.footerMenu * 2},
+  itemsContact: {paddingTop: 60, zIndex: 100},
+  ctaContainer: {
+    // width: 200,
+    height: 80,
+    position: 'absolute',
+
+    bottom: -40,
+    flexDirection: 'row',
+  },
+  ctaItem: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.light,
+  },
+  contentList: {
     flex: 1,
+    width: Metrics.screenWidth,
   },
-  mapContainer: {
-    paddingBottom: 20,
-  },
-  map: {
-    maxWidth: '80%',
+  loading: {
+    backgroundColor: Colors.accentMask(0.5),
+    position: 'absolute',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: Metrics.screenHeight,
+    width: Metrics.screenWidth,
+    zIndex: 5000,
   },
 };
