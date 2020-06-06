@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {View, FlatList, ActivityIndicator, RefreshControl} from 'react-native';
-
 import InfiniteScrollView from 'react-native-infinite-scroll';
-
-import ContactListItem from '../ContactListItem';
+import CardItem from '../CardItem';
 
 import styles from './styles';
 import {Colors, Metrics} from '../../Themes';
@@ -22,9 +20,9 @@ export default class ContactsListView extends Component {
         />
       );
     }
-
     return null;
   }
+
   render() {
     const {
       contacts,
@@ -32,9 +30,7 @@ export default class ContactsListView extends Component {
       moreContacts,
       isRefreshing,
       onRefresh,
-      pictures,
     } = this.props;
-
 
     return (
       <InfiniteScrollView
@@ -51,16 +47,7 @@ export default class ContactsListView extends Component {
         <View style={styles.marginScroll} />
         <FlatList
           data={contacts}
-          renderItem={({item, index}) => (
-            <ContactListItem
-              key={index}
-              item={item}
-              pictures={pictures}
-              onPressedCell={() => {
-                this.props.onPressedCell(item);
-              }}
-            />
-          )}
+          renderItem={({item}) => <CardItem item={item} />}
           keyExtractor={(item, index) => index.toString()}
           ListFoterComponent={this.renderFooter.bind(this)}
         />

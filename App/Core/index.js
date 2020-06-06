@@ -9,7 +9,7 @@ const persistConfig = {
   key: 'root',
   timeout: 10000,
   storage: AsyncStorage,
-  whitelist: ['pics'],
+  whitelist: ['pics', 'favorites'],
 };
 const persistedReducer = persistReducer(persistConfig, reducers());
 export const store = createStore(
