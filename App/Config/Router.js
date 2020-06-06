@@ -3,6 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import Home from '../Screens/Home';
 import ContactDetails from '../Screens/ContactDetails';
+import NewContact from '../Screens/NewContact';
 
 const AppNavigator = createStackNavigator(
   {
@@ -11,6 +12,9 @@ const AppNavigator = createStackNavigator(
     },
     ContactDetails: {
       screen: ContactDetails,
+    },
+    NewContact: {
+        screen: NewContact,
     },
   },
   {

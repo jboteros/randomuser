@@ -30,5 +30,5 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  iconsItem: {marginHorizontal: 10},
+  iconsItem: {marginHorizontal: 7},
 });

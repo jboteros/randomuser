@@ -12,11 +12,11 @@ export default data => {
     <TouchableOpacity style={styles.container} onPress={() => data.action()}>
       <Text
         style={Fonts.style.light(
-          Colors.accentColorLight,
+          Colors.dark1,
           Fonts.size.small,
           'left',
         )}>
-        <Icon name={icon} size={Fonts.size.small} color={'rgb(0,98,150)'} />{' '}
+        <Icon name={icon} size={Fonts.size.small} color={Colors.accentColor} />{' '}
         {title}
       </Text>
       <Text style={Fonts.style.bold(Colors.dark, Fonts.size.medium, 'left')}>

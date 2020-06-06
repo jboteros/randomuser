@@ -210,14 +210,14 @@ export default class ContactDetails extends Component {
                   this.dialNumber(cell);
                 }}
                 style={styles.ctaItem}>
-                <Icon name={'mobile-alt'} size={24} color={'rgb(0,98,150)'} />
+                <Icon name={'mobile-alt'} size={24} color={Colors.accentColor} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
                   this.sendEmail();
                 }}
                 style={styles.ctaItem}>
-                <Icon name={'envelope'} size={24} color={'rgb(0,98,150)'} />
+                <Icon name={'envelope'} size={24} color={Colors.accentColor} />
               </TouchableOpacity>
             </View>
           </View>
