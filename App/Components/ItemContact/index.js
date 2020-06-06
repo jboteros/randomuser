@@ -7,16 +7,18 @@ import styles from './styles';
 import {Fonts, Colors} from '../../Themes';
 
 export default data => {
-  const {title, value, icon} = data;
+  const {title, value, icon, color} = data;
   return (
     <TouchableOpacity style={styles.container} onPress={() => data.action()}>
       <Text
         style={Fonts.style.light(
-          Colors.accentColorLight,
+          //Colors.accentColorLight,
+          //'rgb(68,18,58)',
+          color,
           Fonts.size.small,
           'left',
         )}>
-        <Icon name={icon} size={Fonts.size.small} color={'rgb(0,98,150)'} />{' '}
+        <Icon name={icon} size={Fonts.size.small} color={color} />{' '}
         {title}
       </Text>
       <Text style={Fonts.style.bold(Colors.dark, Fonts.size.medium, 'left')}>

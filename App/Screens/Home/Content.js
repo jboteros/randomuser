@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
-import {View, StatusBar} from 'react-native';
+import {View, StatusBar, TouchableOpacity, Text, Modal} from 'react-native';
 
 import Header from '../../Components/Header';
 import ContactsListView from '../../Components/ContactsListView';
 import Loading from '../../Components/Loading';
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import IconFont from 'react-native-vector-icons/FontAwesome';
+
+import Favoritos from '../Favoritos';
+
 import styles from './styles';
 
-export default class Home extends Component {
+export default class Home extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {loadingContacts: false};
+    this.state = {loadingContacts: false, modal: false};
+
+    //global.favoritos = ['aubrey.edwards@example.com', 'dale.turner@example.com']; 
   }
 
   async componentDidMount() {
@@ -48,17 +55,44 @@ export default class Home extends Component {
     });
   }
 
+  getResponse(result){
+    this.setState({
+      modal: false, 
+    });
+  }
+
   render() {
-    const {loading, profile, pictures, list, navigation} = this.props;
-    const {loadingContacts} = this.state;
+    const {loading, profile, pictures, list, navigation, favoritos, setFavoritos, deleteFavoritos} = this.props;
+    const {loadingContacts, modal} = this.state;
 
     return (
       <View style={styles.container}>
+
+        <Modal style={{flex: 1}}
+          animationType="slide"
+          transparent={true}
+          visible={modal}
+          onRequestClose={() => {
+          //Alert.alert('Debe esperar a que termine el video.');
+        }}>
+          <View style={styles.modalView}>
+              
+                
+              <Favoritos navigation={navigation} callback={this.getResponse.bind(this)}/>
+                <TouchableOpacity style={styles.btnCerrar} onPress={()=>{this.setState({
+                  modal: !modal
+                });}}>
+                  <Icon name={'times'} size={20} color={'rgb(255,255,255)'} />
+                </TouchableOpacity>
+          </View>
+        </Modal>
+
         <Header profile={profile} />
         <View style={styles.contentList}>
           <ContactsListView
             list={list}
             contacts={list}
+            favoritos={favoritos}
             currentLocation={this.props.currentLocation}
             moreContacts={true}
             pictures={pictures}
@@ -67,6 +101,8 @@ export default class Home extends Component {
               this.loadContacts();
             }}
             isRefreshing={loadingContacts}
+            setFavoritos={setFavoritos}
+            deleteFavoritos={deleteFavoritos}
             onRefresh={() => {
               this.onRefresh();
             }}
@@ -79,6 +115,15 @@ export default class Home extends Component {
           />
         </View>
         <Loading loading={loading} />
+        <TouchableOpacity style={styles.footer} onPress={()=>{this.setState({
+          modal:!modal, 
+        });}}>
+          <View >
+              
+              <Text style={styles.textfooter}><IconFont name={'star'} size={15} color={'#fff'} /> Favoritos</Text>
+            
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
