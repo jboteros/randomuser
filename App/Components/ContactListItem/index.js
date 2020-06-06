@@ -76,21 +76,21 @@ export default data => {
             dialCall();
           }}
           style={styles.iconsItem}>
-          <Icon name={'mobile-alt'} size={15} color={'rgb(0,98,150)'} />
+          <Icon name={'mobile-alt'} size={15} color={Colors.accentColor} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             sendEmail();
           }}
           style={styles.iconsItem}>
-          <Icon name={'envelope'} size={15} color={'rgb(0,98,150)'} />
+          <Icon name={'envelope'} size={15} color={Colors.accentColor} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             goLocation();
           }}
           style={styles.iconsItem}>
-          <Icon name={'map-marker-alt'} size={15} color={'rgb(0,98,150)'} />
+          <Icon name={'map-marker-alt'} size={15} color={Colors.accentColor} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
