@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { StatusBar } from 'react-native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './App/Core';
@@ -13,6 +14,11 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          <StatusBar
+            animated
+            backgroundColor="#F43556"
+            barStyle="light-content"
+          />
           <Router />
         </PersistGate>
       </Provider>
